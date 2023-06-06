@@ -11,5 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name : Print Title of PR
-      run: echo The Title of your PR is ${{ github.event.pull_request.title }} |
-           echo The Title of your body is ${{ github.event.pull_request.body }}
+      run: echo The Title of your PR is ${{ github.event.pull_request.title }}
+    - name: feishu bot
+    # You may pin to the exact commit or the version.
+    # uses: wangsijie/feishu-bot@5d67dc90d166aa6b4de341a0bd01c979c1aeac86
+    uses: wangsijie/feishu-bot@v1
+    with:
+      # webhook中的uuid
+      uuid: 2d89a621-0504-4d5d-a861-098e05e50010
+      # 选填，快速发送的文字
+      text: ''
+      # 选填，发送的json
+      data: |
+        {"msg_type":"interactive","card":{"elements":[{"tag":"div","text":{"content":"${{ github.event.pull_request.title }}","tag":"lark_md"}},{"tag":"div","text":{"content":"${{ github.event.pull_request.body }}","tag":"lark_md"}},{"actions":[{"tag":"button","text":{"content":"访问8082","tag":"lark_md"},"url":"http://69.230.239.221:9087/","type":"default","value":{}},{"tag":"button","text":{"content":"访问8086","tag":"lark_md"},"url":"http://69.230.239.221:9089/","type":"default","value":{}}],"tag":"action"}],"header":{"title":{"content":"${{ github.event.repository.name }}流水线状态通知","tag":"plain_text"}}}}
