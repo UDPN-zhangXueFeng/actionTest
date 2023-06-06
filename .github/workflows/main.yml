@@ -1,0 +1,15 @@
+name: Auto Deploy
+on:
+  pull_request:
+    branches:
+      - develop
+    types:
+      - closed
+jobs:
+  build-and-deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+    - name : Print Title of PR
+      run: echo The Title of your PR is ${{ github.event.pull_request.title }} |
+           echo The Title of your body is ${{ github.event.pull_request.body }}
